@@ -3,6 +3,7 @@
 try{ 
     
     if ($_POST){
+        ini_set("soap.wsdl_cache_enabled", "0");
         $Empresa =  $_POST["TxtEmpresa"];
         $Estatus =  $_POST["CmbEstatus"];
         $FechaIni =  $_POST["txtFechaIni"]; 
@@ -38,8 +39,8 @@ try{
   var_dump($e);
 }
 
-    echo "<div class='table-responsive'>
-        <table id='grid' class='table table-striped table-bordered table-condensed table-hover display compact' cellspacing='0' width='100%' ><tfoot><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tfoot></table></div>";
+    echo "<div>
+        <table id='grid' class='table table-striped table-bordered table-condensed table-hover display compact' cellspacing='0' style='width:100%;' ><tfoot><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tfoot></table></div>";
 
 $arreglo = [];
 for($i=0; $i<count($Datos); $i++){

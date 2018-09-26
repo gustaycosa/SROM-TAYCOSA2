@@ -78,29 +78,42 @@ echo'<style>
         document.addEventListener('touchmove', function(e) {
             e.preventDefault();
             var touch = e.touches[0];
+            //alert(touch.pageX + " - " + touch.pageY);
         }, false);
         
         $(document).on('click touchstart','.close',function(){
+            //id del item menu
             var ID = $( this ).attr("name");
             $( "#navbar #"+ID ).remove();
             $( "#ifm"+ID ).remove();
         });
         
         $(document).on('click touchstart','.vna-act',function(){
+            //id de ventana
             var ids = $( this ).attr("id");
+            //id de iframe a partir de ventana
             var idcomplete = '#ifm'+ids;
+            //cambiar clase de abierto a cerrado a iframe
             $("#principal iframe").hide();
+            //cambiar clase de activo a inactivo a ventana
             $("#navbar a").attr('class').replace('vna-act', 'vna-min');
+            //cambiar clase de activo a inactivo a ventana
             $(this).removeClass( 'vna-act' ).addClass( 'vna-min' );
             $( idcomplete ).hide();
         });
         
         $(document).on('click touchstart','.vna-min',function(){
+            //id de ventana
             var ids = $( this ).attr("id");
+            //id de iframe a partir de ventana
             var idcomplete = '#ifm'+ids;
+            //cambiar clase de abierto a cerrado a iframe
+            //cambiar clase de activo a inactivo a ventana
+            //$("#navbar a").attr('class').replace('vna-act', 'vna-min');
 			$("#navbar > a").removeClass('vna-act').addClass('vna-min');
 			$("#principal iframe").hide();
 			$(this).removeClass( 'vna-min' ).addClass( 'vna-act' );
+            //cambiar clase de activo a inactivo a ventana
             $( idcomplete ).show();
         });
         
@@ -122,6 +135,7 @@ echo'<style>
             $("#navmenu").css("left","-300px");
             $("#divblock").hide();
             $("#edo").css("left","0px");
+            //$("#principal,#navbar").removeClass('darkness');
         });
         
         $(document).on('click touchstart','.list-item',function(){
@@ -143,6 +157,7 @@ echo'<style>
             $("#navmenu").css("left","-300px");
             $("#divblock").hide();
             $("#edo").css("left","0px");
+            //$("#principal,#navbar").removeClass('darkness');
         });
 
         $(document).on('click touchstart','ul.nav li a',function(){
@@ -159,6 +174,7 @@ echo'<style>
                 $("#navmenu").hide();
                 $("#navmenu").css("left","-300px");
                 $("#edo").css("left","0px");
+                //$("#principal,#navbar").removeClass('darkness');
         });
         
         $(document).on('click touchstart','#divblock',function(){
@@ -166,6 +182,7 @@ echo'<style>
                 $("#navmenu").css("left","-300px");
                 $("#divblock").hide();
                 $("#edo").css("left","0px");
+                //$("#principal,#navbar").removeClass('darkness');
         });
         
         $(document).on('click touchstart','#edo',function(){
@@ -174,12 +191,14 @@ echo'<style>
                 $("#divblock").show();
 				$("#navmenu").css("left","0px");
                 $("#edo").css("left","300px");
+                //$("#principal,#navbar").addClass('darkness');
 			}else{
                 
                 $("#navmenu").hide();
                 $("#navmenu").css("left","-300px");
                 $("#divblock").hide();
                 $("#edo").css("left","0px");
+                //$("#principal,#navbar").removeClass('darkness');
 			}
         });
         

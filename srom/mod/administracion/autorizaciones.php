@@ -72,20 +72,23 @@
 
                         <button type="submit" id="btnEnviar2" class="btn btn-primary btn-sm" onMouseOver="">Consultar</button>
                         <button type="button" id="btnNuevo" class="btn btn-primary btn-sm" onMouseOver="" data-toggle="modal" data-target="#mdlnvo">Nuevo</button>
-                        <button id="button">contar</button>
+                    <button type="submit" id="btnEnviar" class="btn btn-primary btn-sm" onMouseOver="">                         
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Consultar</button>
+                    <button type="button" id="btnExcel" class="btn btn-success btn-sm" onMouseOver="">                         
+                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Excel</button>
+                    <button type="button" id="btnPDF" class="btn btn-danger btn-sm" onMouseOver="">
+                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> PDF</button>
+                    <button type="button" id="btnPrint" class="btn btn-default btn-sm" onMouseOver="">                         
+                        <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir</button>
                     </div>
                   
                 </form>
                 <div class="respuesta"></div>                 
-                <div class="form-inline">
-                    <label for="inputFechaIni">Filtro:</label>
-                    <input type="text" class="form-control" id="txtbusqueda" name="txtbusqueda" data-column-index='0' value="" placeholder="Busqueda rapida">
-                </div>
+
             
                 </div>
               </div>
-
-        <?php echo CargaGif();?>
+                <?php echo CargaGif();?>
         <?php echo Script(); ?>
     </body>
 
