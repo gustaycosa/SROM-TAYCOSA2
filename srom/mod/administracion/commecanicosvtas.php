@@ -1,4 +1,4 @@
-include("../../funciones.php"); include("validasesion.php"); ?>
+<?php include("validasesion.php"); ?>
 <!DOCTYPE html>
 <html class="no-js">
 

@@ -3,8 +3,8 @@
 try{ 
     
     if ($_POST){
-        
-        $Empresa = $_POST["CmbEmpresa"];
+        ini_set("soap.wsdl_cache_enabled", "0");
+        //$Empresa = $_POST["CmbEmpresa"];
         $Sucursal = $_POST["Cmbsucursales"];
         $Ejercicio =  $_POST["TxtEjercicio"]; 
         $Mes =  $_POST["TxtMes"]; 
@@ -17,7 +17,7 @@ try{
         $parametros['sId_Sucursal'] = $Sucursal;
         $parametros['sEjercicio'] = $Ejercicio;
         $parametros['sMes'] = $Mes;
-        //ini_set("soap.wsdl_cache_enabled", "0");
+        //
         //Invocación al web service
         $WS = new SoapClient($WebService, $parametros);
         //recibimos la respuesta dentro de un objeto

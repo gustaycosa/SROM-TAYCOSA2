@@ -11,8 +11,8 @@ try{
         $parametros = array();
         $parametros['Id_Solicita'] = $Ejercicio;
         $WS = new SoapClient($WebService, $parametros);
-        $result = $WS->TareasSolicitadas($parametros);
-        $xml = $result->TareasSolicitadasResult->any;
+        $result = $WS->TareaReporte($parametros);
+        $xml = $result->TareaReporteResult->any;
         $obj = simplexml_load_string($xml);
         $Datos = $obj->NewDataSet->Table;
 //echo $xml;
@@ -47,6 +47,7 @@ for($i=0; $i<count($Datos); $i++){
                 columns: [
                     { data: "Fecha" },
                     { data: "Nombre_Para" },
+                    { data: "Nombre_Sol" },
                     { data: "asunto" },
                     { data: "ESTATUS" },
                     {
@@ -65,10 +66,11 @@ for($i=0; $i<count($Datos); $i++){
                 columnDefs: [
                     { "title": "FECHA", "targets": 0},
                     { "title": "DIRIGIDO A", "targets": 1},
-                    { "title": "ASUNTO", "targets": 2},
-                    { "title": "ESTATUS", "targets": 3},
-                    { "title": "", "targets": 4},
+                    { "title": "RESPONSABLE", "targets": 2},
+                    { "title": "ASUNTO", "targets": 3},
+                    { "title": "ESTATUS", "targets": 4},
                     { "title": "", "targets": 5},
+                    { "title": "", "targets": 6},
                 ],
             'createdRow': function ( row, data, index ) {
                 $(row).attr({ id:data.Tarea});

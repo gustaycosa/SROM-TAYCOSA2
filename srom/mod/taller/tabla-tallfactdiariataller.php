@@ -4,7 +4,7 @@ try{
     
     if ($_POST){
         ini_set("soap.wsdl_cache_enabled", "0");
-        $Empresa = $_POST["CmbEmpresa"];
+        //$Empresa = $_POST["CmbEmpresa"];
         $A =  $_POST["Ffin"]; 
         $De = $_POST["Fini"];
         $Cliente =  $_POST["TxtClave"]; 
