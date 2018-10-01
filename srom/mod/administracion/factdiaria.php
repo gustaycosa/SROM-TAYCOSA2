@@ -42,6 +42,10 @@
                 </form>
 
                 <div class="respuesta"></div>
+                <div class="form-inline">
+                    <label for="inputFechaIni">Filtro:</label>
+                    <input type="text" class="form-control" id="txtbusqueda" name="txtbusqueda" data-column-index='0' value="" placeholder="Busqueda rapida">
+                </div>                
                 <?php echo CargaGif();?>
             </div>
         </div>

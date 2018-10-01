@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html class="no-js">
 
-<?php <?php include("../../funciones.php"); ?>
+<?php include("../../funciones.php"); ?>
 <?php echo Cabecera('Maquinaria en reparacion'); ?>
 <?php
     $TituloPantalla = 'Maquinaria en reparacion';  

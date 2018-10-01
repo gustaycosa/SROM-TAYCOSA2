@@ -33,7 +33,7 @@ try{
   var_dump($e);
 }
 
-echo "<div class='table-responsive'><table id='grid' class='table table-striped table-bordered table-condensed table-hover display compact' cellspacing='0' width='100%' ></table></div>";
+echo "<div class='table-responsive'><table id='grid' class='table table-striped table-bordered table-condensed table-hover display compact' cellspacing='0' width='100%' ><tfoot><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tfoot></table></div>";
 
 	$arreglo = [];
 	for($i=0; $i<count($Datos); $i++){
@@ -186,11 +186,61 @@ $(document).ready(function() {
                     'sSortDescending': ': Activar para ordenar la columna de manera descendente'
                 }
             },
-            'scrollY':        '60vh',
-            'scrollX':        true,
+            'scrollY': '60vh',
             'scrollCollapse': true,
-            'paging':         false
+            'scrollX': true,
+            'paging': false,
+             fixedHeader: {
+                header: true,
+                footer: false
+            },
+            'responsive':true,
+       "footerCallback": function ( row, data, start, end, display ) {
+            var api = this.api(), data;
+           
+            var api_anoant = this.api(), data;
+            var api_anoact = this.api(), data;
+            var api_utilper = this.api(), data;
+            var api_inggen = this.api(), data;
+            var api_promen = this.api(), data;
+            var api_acuene = this.api(), data;
+            var api_variac = this.api(), data;
+            var api_mesant = this.api(), data;
+            var api_mesact = this.api(), data;
+
+            
+            // Remove the formatting to get integer data for summation
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+            //===========================================================================
+            total_anoact = api_anoact
+                .column( 8 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+            // Update footer
+            $( api_anoact.column( 8 ).footer() ).html('$'+ total_anoact.toFixed(2) );
+           
+        }
         } );
+        $('#txtbusqueda').on('keyup change', function() {
+          //clear global search values
+          table.search('');
+          table.column($(this).data('columnIndex')).search(this.value).draw();
+        });
+
+        $(".dataTables_filter input").on('keyup change', function() {
+          //clear column search values
+          table.columns().search('');
+          //clear input values
+          $('#txtbusqueda').val('');
+        });
     } );
     </script>
 

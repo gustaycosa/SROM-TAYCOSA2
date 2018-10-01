@@ -89,8 +89,8 @@ for($i=0; $i<count($Datos); $i++){
                 }
             },
             paging: false,
-            searching: false,
-            ordering: false,
+            searching: true,
+            ordering: true,
             buttons: [
                 {
                     extend: 'copy',
