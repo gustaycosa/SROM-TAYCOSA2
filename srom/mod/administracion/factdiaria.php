@@ -42,6 +42,7 @@
                 </form>
 
                 <div class="respuesta"></div>
+                <div class="griddet"></div>
                 <div class="form-inline">
                     <label for="inputFechaIni">Filtro:</label>
                     <input type="text" class="form-control" id="txtbusqueda" name="txtbusqueda" data-column-index='0' value="" placeholder="Busqueda rapida">
@@ -55,9 +56,7 @@
 
     <script type="text/javascript">
         $(function() {
-
             $("form").on('submit', function(e) {
-
                 e.preventDefault();
                 $('#CargaGif').show();
                 $('#btnEnviar').attr('disabled', 'disabled')
@@ -77,7 +76,6 @@
                         alert('Algo salio mal :S');
                     }
                 });
-
                 return false; // Evitar ejecutar el submit del formulario.
             });
         });
@@ -90,20 +88,20 @@
             $("#cabecera").html("Reporte cliente - " + id + " " + name);
             $('#myModal').modal('hide');
         });
-
-        $(document).on('click touchstart','#ClientesPop',function(){
+        
+        $(document).on('click touchstart','tr.tar',function(){
+            var id = $(this).attr("id");
+            $("#TxtTarea").val(id);
             $('#CargaGif').show();
-            //$('#btnEnviar').attr('disabled', 'disabled')
             $.ajax({
                 type: "POST",
-                url: 'CmbClientes.php',
-                data: $("form").serialize(), // Adjuntar los campos del formulario enviado.
+                url: 'nvo-tareascomselect.php',
+                data: $("#frmcoment").serialize(), 
                 success: function(data) {
                     $('#CargaGif').hide();
-                    $('#btnEnviar').removeAttr('disabled');
-                    $(".respuesta").html(data); // Mostrar la respuestas del script PHP.
-                    $(".respuesta").show();
-                    $('#myModal').modal('show')
+                    $(".comentarios").html(data);
+                    $('#btnEnviar2').click();
+                    $('#gridcom').DataTable().draw();
                 },
                 error: function(error) {
                     $('#CargaGif').hide();
@@ -111,14 +109,10 @@
                     alert('Algo salio mal :S');
                 }
             });
-
-            return false; // Evitar ejecutar el submit del formulario.
+            return false;
         });
         
         <?php echo JqueryCmbClientes(); ?> 
 
-
-        
     </script>
-
 </html>

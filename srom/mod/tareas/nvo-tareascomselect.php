@@ -43,7 +43,7 @@ for($i=0; $i<count($Datos); $i++){
 
     <script type="text/javascript"> 
         var datos = 
-        include("../../funciones.php"); 
+        <?php
             echo json_encode($arreglo);
         ?>
         ;

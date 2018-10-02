@@ -52,7 +52,11 @@
 
     <script type="text/javascript">
         var timer = 0;
-        $(function() {        $( "#btnExcel" ).click(function() {$('.buttons-excel').click();});         $( "#btnPDF" ).click(function() {$('.buttons-pdf').click();});         $( "#btnPrint" ).click(function() {$('.buttons-print').click();});
+        $(function() {       
+            $( "#btnExcel" ).click(function() {$('.buttons-excel').click();});         
+            $( "#btnPDF" ).click(function() {$('.buttons-pdf').click();});         
+            $( "#btnPrint" ).click(function() {$('.buttons-print').click();});
+            
             document.addEventListener('touchmove', function(e) {
                 e.preventDefault();
                 var touch = e.touches[0];
@@ -126,7 +130,8 @@
             $("#cabecera").html("REPORTE DE ESTADOS - PERIODO " + name + " - " + id );
         });
         
-/*        $(document).on('dblclick touchstart','tr.vendedor',function(){
+/*      
+        $(document).on('dblclick touchstart','tr.vendedor',function(){
             var id = $(this).attr("id");
             $("#TxtClave").val(id);
             $('#CargaGif').show();
@@ -148,7 +153,7 @@
             });
             return false; // Evitar ejecutar el submit del formulario.	
         });
-        */
+*/
         $(document).on('click touchstart','td.btn_facturado',function(){
             /*
             var id = $(this).attr("id");
@@ -156,7 +161,7 @@
             $("#TxtClave").val(id);
             */
             
-            if(timer == 0) {
+            if(timer == 0){
                 timer = 1;
                 timer = setTimeout(function(){ timer = 0; }, 600);
             }

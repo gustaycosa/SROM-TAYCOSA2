@@ -85,6 +85,7 @@ try{
                 else {
                     $(row).addClass('bg-danger');
                 }
+                $(row).addClass('tar');
             },
             paging: false,
             searching: false,

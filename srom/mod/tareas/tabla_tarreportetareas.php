@@ -23,7 +23,7 @@ try{
 }
 
     echo "<div class='table-responsive'>
-        <table id='gridsoli' class='table table-bordered table-hover display compact' cellspacing='0' width='100%' ></table></div>";
+        <table id='grid' class='table table-bordered table-hover display compact' cellspacing='0' width='100%' ><tfoot><tr><th></th><th></th><th></th><th></th><th></th></tr></tfoot></table></div>";
 
 $arreglo = [];
 for($i=0; $i<count($Datos); $i++){
@@ -40,40 +40,25 @@ for($i=0; $i<count($Datos); $i++){
             echo json_encode($arreglo);
         ?>
         ;
-        $(document).ready(function() {                                                                                                                                                                                                                                                                                                                                  
-
-            var table = $('#gridsoli').DataTable({
+        $(document).ready(function() {                                                                                             
+            var table = $('#grid').DataTable({
                 data:datos,
                 columns: [
                     { data: "Fecha" },
-                    { data: "Nombre_Para" },
                     { data: "Nombre_Sol" },
+                    { data: "Nombre_Para" },
                     { data: "asunto" },
-                    { data: "ESTATUS" },
-                    {
-                        "className":      'fin',
-                        "orderable":      false,
-                        "data":           '',
-                        "defaultContent": 'Finalizar'
-                    },
-                    {
-                        "className":      'del',
-                        "orderable":      false,
-                        "data":           '',
-                        "defaultContent": 'X'
-                    }
+                    { data: "ESTATUS" }
                 ],
                 columnDefs: [
                     { "title": "FECHA", "targets": 0},
                     { "title": "DIRIGIDO A", "targets": 1},
                     { "title": "RESPONSABLE", "targets": 2},
                     { "title": "ASUNTO", "targets": 3},
-                    { "title": "ESTATUS", "targets": 4},
-                    { "title": "", "targets": 5},
-                    { "title": "", "targets": 6},
+                    { "title": "ESTATUS", "targets": 4}
                 ],
             'createdRow': function ( row, data, index ) {
-                $(row).attr({ id:data.Tarea});
+                $(row).attr({id:data.Tarea, 'data-toggle':'modal', 'data-target':'#mdlcom'});
                 var a = data.ESTATUS;
                 if ( a == 'PENDIENTE' ) {
                     $(row).addClass('bg-warning');
@@ -87,6 +72,7 @@ for($i=0; $i<count($Datos); $i++){
                 else {
                     $(row).addClass('bg-danger');
                 }
+                $(row).addClass('tar');
             },
             paging: false,
             searching: true,
@@ -198,7 +184,33 @@ for($i=0; $i<count($Datos); $i++){
                 header: true,
                 footer: false
             },
-            'responsive':true
+            'responsive':true,
+            initComplete: function () {
+                this.api().columns([1, 2, 4]).every( function () {
+                    var column = this;
+
+                    var select = $('<select><option value="">Selecciona</option></select>')
+                        .appendTo( $(column.footer()).empty() )
+                        .on( 'change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search( val ? '^'+val+'$' : '', true, false )
+                                .draw();
+                        } );
+
+                    column.data().unique().sort().each( function ( d, j ) {
+                        if(j>1){
+                            select.append( '<option value="'+d+'" width="auto">'+d+'</option>' )
+                        }
+                        else{
+
+                        }
+                    } );
+                } );
+            }
         } );
             
 /*        $('#txtbusqueda').on('keyup change', function() {

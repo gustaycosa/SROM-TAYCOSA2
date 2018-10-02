@@ -71,7 +71,7 @@ for($i=0; $i<count($Datos); $i++){
                     { "title": "", "targets": 5},
                 ],
             'createdRow': function ( row, data, index ) {
-                $(row).attr({ id:data.Tarea});
+                $(row).attr({id:data.Tarea, 'data-toggle':'modal', 'data-target':'#mdlcom'});
                 var a = data.ESTATUS;
                 if ( a == 'PENDIENTE' ) {
                     $(row).addClass('bg-warning');
@@ -85,6 +85,7 @@ for($i=0; $i<count($Datos); $i++){
                 else {
                     $(row).addClass('bg-danger');
                 }
+                $(row).addClass('tar');
             },
             paging: false,
             searching: false,

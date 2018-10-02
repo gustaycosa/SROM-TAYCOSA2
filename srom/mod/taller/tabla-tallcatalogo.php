@@ -26,8 +26,7 @@ try{
 }
 
     echo "<div class='table-responsive'>
-        <table id='grid' class='table table-striped table-bordered table-condensed table-hover display compact nowrap' cellspacing='0' width='100%'><tfoot><tr><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr></tfoot></table></div>";
-
+        <table id='grid' class='table table-bordered table-hover display compact' cellspacing='0' width='100%' ><tfoot><tr><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr></tfoot></table></div>";
 	$arreglo = [];
 	for($i=0; $i<count($Datos); $i++){
 		$arreglo[$i]=$Datos[$i];
@@ -87,7 +86,9 @@ try{
                     "className":      'algleft',
                     "orderable":      true,
                     "data":           'UBICACION',
-                    "defaultContent": 'ver'
+                    "defaultContent": 'ver',
+                    'width': '200px', 
+                    className: "text-left"
                 }
             ],
             columnDefs: [
@@ -108,12 +109,6 @@ try{
             ],//estatus, fallas, ubicacion
             'createdRow': function ( row, data, index ) {
                 $(row).attr({ id:data.Id_Maquinaria});
-/*                $(row).addClass('maquinaria');
-                $(row).children("td.img_maq").css('background', 'url("images/'+data.Id_Maquinaria+'.jpg") center no-repeat / cover');*/
-                /*
-                $(row).children("td.img_maq").css('height', '150px');
-                $(row).children("td.img_maq").css('width', '150px');
-                */
             },
             dom: 'lfBrtip',    
             paging: false,
@@ -228,7 +223,7 @@ try{
             },
             'responsive':true,
             initComplete: function () {
-                this.api().columns().every( function () {
+                this.api().columns([2, 3, 4]).every( function () {
                     var column = this;
 
                     var select = $('<select><option value="">Selecciona</option></select>')

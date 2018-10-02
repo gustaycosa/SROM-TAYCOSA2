@@ -24,6 +24,8 @@ try{
 	for($i=0; $i<count($Datos); $i++){
          echo "<li><a id='".$Datos[$i]->$Columnas[0]."' href='#'>".$Datos[$i]->$Columnas[1]."</a></li>";
 	}
+    echo '<li role="separator" class="divider"></li>';
+    echo '<li id="0"><a href="#">TODOS</a></li>';
 
 ?>
 

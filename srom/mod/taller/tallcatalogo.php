@@ -39,7 +39,10 @@
     </body>
 
     <script type="text/javascript">
-        $(function() {        $( "#btnExcel" ).click(function() {$('.buttons-excel').click();});         $( "#btnPDF" ).click(function() {$('.buttons-pdf').click();});         $( "#btnPrint" ).click(function() {$('.buttons-print').click();});
+        $(function() {        
+            $( "#btnExcel" ).click(function() {$('.buttons-excel').click();});         
+            $( "#btnPDF" ).click(function() {$('.buttons-pdf').click();});         
+            $( "#btnPrint" ).click(function() {$('.buttons-print').click();});
 
             $("form").on('submit', function(e) {
                 e.preventDefault();

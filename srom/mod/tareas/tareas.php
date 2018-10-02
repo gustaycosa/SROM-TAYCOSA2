@@ -1,4 +1,4 @@
-<?php include("validasesion.php"); ?>
+<?php include("../../validasesion.php"); ?>
 <!DOCTYPE html>
 <html class="no-js">
 
@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="TxtEjercicio" name="TxtEjercicio" value="<?php $id = $_GET["e"]; echo $id;?>" placeholder="Ingrese ejercicio">
                     </div>
-                    <!--                    <button type="submit" id="btnEnviar" class="btn btn-primary btn-sm" onMouseOver="">                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Consultar</button>                     <button type="button" id="btnExcel" class="btn btn-success btn-sm" onMouseOver="">                         <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Excel</button>                     <button type="button" id="btnPDF" class="btn btn-danger btn-sm" onMouseOver="">                         <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> PDF</button>                     <button type="button" id="btnPrint" class="btn btn-default btn-sm" onMouseOver="">                         <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir</button>-->
+
                     <button type="submit" id="btnEnviar2" class="btn btn-primary btn-sm" onMouseOver="">Consultar</button>
                     <button type="button" id="btnNuevo" class="btn btn-primary btn-sm" onMouseOver="" data-toggle="modal" data-target="#mdlnvo">Nuevo</button>
                     <!--<button type="button" id="addRow" class="btn btn-primary btn-sm" onMouseOver="" data-target="#mdlnvo">Comentario</button>-->                    
@@ -44,30 +44,18 @@
                   <div id='mdldivnvo' class='modal-body'>
                     <form id="frmnvo" class="form-horizontal" method="POST">
                     <input type="hidden" class="form-control" id="TxtIdSolicita" name="TxtIdSolicita" value="<?php $id = $_GET["e"]; echo $id;?>" placeholder="Ingrese ejercicio">
-<!--                <div class="form-group">
-                        <label for="inputFechaIni">Departamento:</label>
-                        <select id="TxtDpto" name="TxtDpto" class="form-control">
-                            <option value="1">Enero</option>
-                        </select>
-                      </div>-->
                     <div class="form-group">
                         <label for="inputtext3" class="col-sm-2 control-label">Empleado:</label>
                         <div class="col-sm-10">
                             <?php echo CmbCualquierasId('ID','NOMBRE','NOMBRESUSUARIOWEB','Todos','0'); ?>
                         </div>
                     </div>
-                      <div class="form-group">
-                        <label for="inputtext3" class="col-sm-2 control-label">Fecha solicita:</label>
-                        <div class="col-sm-10">
-                            <input type="date" name="txtFecha" id="txtFecha" value="<?php echo date("Y-m-d");?>" class="form-control" placeholder="Rango Fecha Final">
-                        </div>
-                      </div>
-                      <div class="form-group">
+<!--                      <div class="form-group">
                         <label for="inputtext3" class="col-sm-2 control-label">Descripcion:</label>
                         <div class="col-sm-10">
                           <input type="text" name="TxtDescripcion" class="form-control" id="TxtDescripcion" placeholder="Agregue su descripcion">
                         </div>
-                      </div>
+                      </div>-->
                       <div class="form-group">
                         <label for="inputtext3" class="col-sm-2 control-label">Asunto:</label>
                         <div class="col-sm-10">
@@ -130,7 +118,8 @@
     <script type="text/javascript">
 
         
-        $(function() {        $( "#btnExcel" ).click(function() {$('.buttons-excel').click();});         $( "#btnPDF" ).click(function() {$('.buttons-pdf').click();});         $( "#btnPrint" ).click(function() {$('.buttons-print').click();});           
+        $(function() {        
+            
             $("form#formulario").on('submit', function(e) {  
                 $('#CargaGif').show();
                 e.preventDefault();
@@ -145,10 +134,10 @@
           $('#mdlcom').modal('hide');
         }); 
         
-        $(document).on('dblclick touchstart','tr.tar',function(){
+/*        $(document).on('dblclick touchstart','tr.tar',function(){
             var id = $(this).attr("id");
             $("#TxtClave").val(id);
-        });
+        });*/
         
         $("form#frmnvo").on('submit', function(e) {
             e.preventDefault();

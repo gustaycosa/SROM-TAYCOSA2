@@ -4,8 +4,6 @@ try{
     if ($_POST){
         ini_set("soap.wsdl_cache_enabled", "0");
         $Asunto =  $_POST["TxtAsunto"];
-        $Descripcion =  $_POST["TxtDescripcion"];
-        $FechaSol =  $_POST["txtFecha"];
         $Id_Solicita =  $_POST["TxtIdSolicita"];
         $Id_Responsable =  $_POST["CmbTodos"];
 
@@ -13,8 +11,6 @@ try{
         //parametros de la llamada
         $parametros = array();
         $parametros['Asunto'] = $Asunto;
-        $parametros['Descripcion'] = $Descripcion;
-        $parametros['FechaSol'] = $FechaSol;
         $parametros['Id_Solicita'] = $Id_Solicita;
         $parametros['Id_Responsable'] = $Id_Responsable;
 
