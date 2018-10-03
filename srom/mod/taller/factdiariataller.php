@@ -41,6 +41,7 @@
             
                 </div>
                 <div class="respuesta"></div>
+                <div class="griddet"></div>
                 <div class="form-inline">
                     <label for="inputFechaIni">Filtro:</label>
                     <input type="text" class="form-control" id="txtbusqueda" name="txtbusqueda" data-column-index='0' value="" placeholder="Busqueda rapida">
@@ -53,7 +54,19 @@
     <?php echo Script(); ?>
 
     <script type="text/javascript">
-        $(function() {
+        var timer = 0;
+        $(function() {       
+            $( "#btnExcel" ).click(function() {$('.buttons-excel').click();});         
+            $( "#btnPDF" ).click(function() {$('.buttons-pdf').click();});         
+            $( "#btnPrint" ).click(function() {$('.buttons-print').click();});
+            
+            document.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+                var touch = e.touches[0];
+                //alert(touch.pageX + " - " + touch.pageY);
+            }, false);
+        
+
             $("form").on('submit', function(e) {
                 e.preventDefault();
                 $('#CargaGif').show();
@@ -77,14 +90,35 @@
                 return false; // Evitar ejecutar el submit del formulario.
             });
         });
-
-        $(document).on('dblclick touchstart','.Seleccionado',function(){
-            var id = $(this).attr("id");
-            var name = $(this).attr("data-name");
-            $("#TxtCliente").val(id);
-            $("#title").html("Reporte cliente - " + id + " " + name);
-            $("#cabecera").html("Reporte cliente - " + id + " " + name);
-            $('#myModal').modal('hide');
+        
+        $(document).on('click touchstart','tr.tar',function(){
+            if(timer == 0){
+                timer = 1;
+                timer = setTimeout(function(){ timer = 0; }, 600);
+            }
+            else { 
+                var id = $(this).attr("id");
+                $("#TxtClave").val(id);
+                $('#CargaGif').show();
+                $.ajax({
+                    type: "POST",
+                    url: 'tabla-detallefacturas.php',
+                    data: $("form").serialize(), 
+                    success: function(data) {
+                        $('#CargaGif').hide();
+                        $(".griddet").html(data);
+                        $('#btnEnviar2').click();
+                        $('#gridcom').DataTable().draw();
+                    },
+                    error: function(error) {
+                        $('#CargaGif').hide();
+                        console.log(error);
+                        alert('Algo salio mal :S');
+                    }
+                });
+                return false;
+                timer = 0; 
+            }
         });
         
         <?php echo JqueryCmbClientes(); ?> 

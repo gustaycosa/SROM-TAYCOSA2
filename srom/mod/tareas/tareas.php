@@ -116,9 +116,13 @@
     </body>
 
     <script type="text/javascript">
-
-        
-        $(function() {        
+        var timer = 0;
+        $(function() {               
+            document.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+                var touch = e.touches[0];
+                //alert(touch.pageX + " - " + touch.pageY);
+            }, false);     
             
             $("form#formulario").on('submit', function(e) {  
                 $('#CargaGif').show();
@@ -133,11 +137,6 @@
         $( "#closecom" ).click(function() {
           $('#mdlcom').modal('hide');
         }); 
-        
-/*        $(document).on('dblclick touchstart','tr.tar',function(){
-            var id = $(this).attr("id");
-            $("#TxtClave").val(id);
-        });*/
         
         $("form#frmnvo").on('submit', function(e) {
             e.preventDefault();
@@ -191,31 +190,38 @@
             return false; // Evitar ejecutar el submit del formulario.
         });
         
-        $(document).on('click touchstart','tr.tar',function(){
-            var id = $(this).attr("id");
-            $("#TxtTarea").val(id);
-            $('#CargaGif').show();
-            $.ajax({
-                type: "POST",
-                url: 'nvo-tareascomselect.php',
-                data: $("#frmcoment").serialize(), // Adjuntar los campos del formulario enviado.
-                success: function(data) {
-                    //$('#btnEnviar').removeAttr('disabled');
-                    $('#CargaGif').hide();
-                    $(".comentarios").html(data); // Mostrar la respuestas del script PHP.
-                    $("#frmcoment")[0].reset();
-                    $('#btnEnviar2').click();
-                    //$("#mdlcom").show();
-                    //$('.comentarios').modal('show')
-                    $('#gridcom').DataTable().draw();
-                },
-                error: function(error) {
-                    $('#CargaGif').hide();
-                    console.log(error);
-                    alert('Algo salio mal :S');
-                }
-            });
-            return false;// Evitar ejecutar el submit del formulario.	
+        $(document).on('dblclick touchstart','tr.tar',function(){
+            if(timer == 0){
+                timer = 1;
+                timer = setTimeout(function(){ timer = 0; }, 600);
+            }
+            else { 
+                var id = $(this).attr("id");
+                $("#TxtTarea").val(id);
+                $('#CargaGif').show();
+                $.ajax({
+                    type: "POST",
+                    url: 'nvo-tareascomselect.php',
+                    data: $("#frmcoment").serialize(), // Adjuntar los campos del formulario enviado.
+                    success: function(data) {
+                        //$('#btnEnviar').removeAttr('disabled');
+                        $('#CargaGif').hide();
+                        $(".comentarios").html(data); // Mostrar la respuestas del script PHP.
+                        $("#frmcoment")[0].reset();
+                        $('#btnEnviar2').click();
+                        //$("#mdlcom").show();
+                        //$('.comentarios').modal('show')
+                        $('#gridcom').DataTable().draw();
+                    },
+                    error: function(error) {
+                        $('#CargaGif').hide();
+                        console.log(error);
+                        alert('Algo salio mal :S');
+                    }
+                });
+                return false;
+                timer = 0; 
+            }
         });
         
         $(document).on('click touchstart','td.fin',function(){

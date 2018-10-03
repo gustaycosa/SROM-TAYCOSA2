@@ -1,30 +1,18 @@
-<?php include("../../funciones.php"); 
+<?php include("../../funciones.php");
+
 try{ 
     
     if ($_POST){
         ini_set("soap.wsdl_cache_enabled", "0");
-        //$Empresa = $_POST["CmbEmpresa"];
-        $A =  $_POST["Ffin"]; 
-        $De = $_POST["Fini"];
-        $Cliente =  $_POST["TxtClave"]; 
-        $Moneda =  $_POST["CmbMoneda"];
-        $Sucursal =  $_POST["Cmbsucursales"];
-
+        $movimiento=  $_POST["TxtClave"]; 
+        //parametros de la llamada
+        
         //parametros de la llamada
         $parametros = array();
-        $parametros['sId_Empresa'] = $Empresa;
-        $parametros['dtFechaIni'] = $De;
-        $parametros['dtFechaFin'] = $A;
-        $parametros['sId_Cliente'] = $Cliente;
-        $parametros['sMoneda'] = $Moneda;
-        $parametros['sId_Sucursal'] = $Sucursal;
-    
-        //ini_set("soap.wsdl_cache_enabled", "0");
-        //Invocación al web service
+        $parametros['sMovimiento'] = $movimiento;
         $WS = new SoapClient($WebService, $parametros);
-        //recibimos la respuesta dentro de un objeto
-        $result = $WS->CLI_FactDiaria($parametros);
-        $xml = $result->CLI_FactDiariaResult->any;
+        $result = $WS->DetalleFacturas($parametros);
+        $xml = $result->DetalleFacturasResult->any;
         $obj = simplexml_load_string($xml);
         $Datos = $obj->NewDataSet->Table;
 //echo $xml;
@@ -34,61 +22,46 @@ try{
   var_dump($e);
 }
 
-echo "<div class='table-responsive'><table id='grid' class='table table-striped table-bordered table-condensed table-hover display compact' cellspacing='0' width='100%' ><tfoot><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tfoot></table></div>";
+echo "<div class='table-responsive'><table id='griddet' class='table table-striped table-bordered table-condensed table-hover display compact' cellspacing='0' width='100%' ><tfoot><th></th><th></th><th></th><th></th><th></th><th></th></tfoot></table></div>";
 
-	$arreglo = [];
-	for($i=0; $i<count($Datos); $i++){
-		$arreglo[$i]=$Datos[$i];
-	}
+$arreglo = [];
+for($i=0; $i<count($Datos); $i++){
+    $arreglo[$i]=$Datos[$i];
+}
+        //print_r($arreglo);
+        //echo number_format($Suma, 2, ',', ' ');
 
 ?>
 
-     <script type="text/javascript"> 
+    <script type="text/javascript"> 
         var datos = 
-        <?php
+        <?php 
             echo json_encode($arreglo);
         ?>
-		;
-/*
-			$sGridNomb = '#grid';
-			$sWsNomb = 'cliedoctagral';
-            $aColumnas = array("FECHA","CVE_DOCUMENTO","CARGO","ABONO","SALDOCLIENTE","CONCEPTO","REFERENCIA","FECHAVENCE","SALDODOCTO","SALDOMOVTO","DIASVENCE","SUBTOTAL","IMPIVA","DESCTO","TOTAL","CVEDOCTO","TIPODOCTO","FUM","ID_USUARIO");
-            $aTitulos = array("FECHA","CVE_DOCUMENTO","CARGO","ABONO","SALDOCLIENTE","CONCEPTO","REFERENCIA","FECHAVENCE","SALDODOCTO","SALDOMOVTO","DIASVENCE","SUBTOTAL","IMPIVA","DESCTO","TOTAL","CVEDOCTO","TIPODOCTO","FUM","ID_USUARIO");
-			echo GrdRptShort($sGridNomb,$sWsNomb,$aColumnas,$aTitulos);
-            
-		?>*/
-$(document).ready(function() {
-         var table = $('#grid').DataTable({
-            data:datos,
-            columns: [
-                { data: 'FECHA' },
-                { data: 'SUCURSAL' },
-                { data: 'SERIE' },
-                { data: 'FOLIO' },
-                { data: 'MONEDA' },
-                { data: 'TC' },
-                { data: 'CLIENTE' },
-                { data: 'CONCEPTO' },
-                { data: 'TOTAL' }
-            ],
-            columnDefs: [
-                { 'title': 'FECHA', className: "text-center", 'targets': 0},
-                { 'title': 'SUCURSAL', className: "text-left", 'targets': 1},
-                { 'title': 'SERIE', className: "text-left", 'targets': 2},
-                { 'title': 'FOLIO', className: "text-left", 'targets': 3},
-                { 'title': 'MONEDA', className: "text-left", 'targets': 4},
-                { 'title': 'TC', className: "text-right", 'targets': 5},
-                { 'title': 'CLIENTE', className: "text-left", 'targets': 6},
-                { 'title': 'CONCEPTO', className: "text-left", 'targets': 7},
-                { 'title': 'TOTAL', className: "text-right", 'targets': 8}
-            ],
+        ;
+        $(document).ready(function() {                                                                                             
+            var table = $('#griddet').DataTable({
+                data:datos,
+                columns: [
+                    { data: "concepto" },
+                    { data: "articulo" },
+                    { data: "cantidad" },
+                    { data: "precioventa" },
+                    { data: "importe" },
+                    { data: "subtotal" },
+                ],
+                columnDefs: [
+                    { "title": "CONCEPTO", className: "text-left", "targets": 0},
+                    { "title": "ARTICULO", className: "text-left", "targets": 1},
+                    { "title": "CANTIDAD", className: "text-left", "targets": 2},
+                    { "title": "PRECIO VENTA", className: "text-right", "targets": 3},
+                    { "title": "IMPORTE", className: "text-right", "targets": 4},
+                    { "title": "SUBTOTAL", className: "text-right", "targets": 5},
+                ],
             'createdRow': function ( row, data, index ) {
-                $(row).attr({id:data.Movimiento});
-                $(row).addClass('tar');
-            },
-            dom: 'lfBrtip',    
+            },  
             paging: false,
-            searching: true,
+            searching: false,
             ordering: false,
             buttons: [
                 {
@@ -189,7 +162,7 @@ $(document).ready(function() {
                     'sSortDescending': ': Activar para ordenar la columna de manera descendente'
                 }
             },
-            'scrollY': '40vh',
+            'scrollY': '45vh',
             'scrollCollapse': true,
             'scrollX': true,
             'paging': false,
@@ -201,16 +174,9 @@ $(document).ready(function() {
        "footerCallback": function ( row, data, start, end, display ) {
             var api = this.api(), data;
            
-            var api_anoant = this.api(), data;
-            var api_anoact = this.api(), data;
-            var api_utilper = this.api(), data;
-            var api_inggen = this.api(), data;
-            var api_promen = this.api(), data;
-            var api_acuene = this.api(), data;
-            var api_variac = this.api(), data;
-            var api_mesant = this.api(), data;
-            var api_mesact = this.api(), data;
-
+            var api_precioventa = this.api(), data;
+            var api_importe = this.api(), data;
+            var api_subtotal = this.api(), data;
             
             // Remove the formatting to get integer data for summation
             var intVal = function ( i ) {
@@ -219,32 +185,71 @@ $(document).ready(function() {
                     typeof i === 'number' ?
                         i : 0;
             };
-           
             //===========================================================================
-            total_anoact = api_anoact
-                .column( 8 )
+            total_precioventa = api_precioventa
+                .column( 3 )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
 
             // Update footer
-            $( api_anoact.column( 8 ).footer() ).html('$'+ total_anoact.toFixed(2) );
+            $( api_precioventa.column( 3 ).footer() ).html('$'+ total_precioventa.toFixed(2) );
+            //===========================================================================
+            total_importe = api_importe
+                .column( 4 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+            // Update footer
+            $( api_importe.column( 4 ).footer() ).html('$'+ total_importe.toFixed(2) );
+            //===========================================================================
+            total_subtotal = api_subtotal
+                .column( 5 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+            // Update footer
+            $( api_subtotal.column( 5 ).footer() ).html('$'+ total_subtotal.toFixed(2) );
+           
         }
         } );
-        $('#txtbusqueda').on('keyup change', function() {
-          //clear global search values
-          table.search('');
-          table.column($(this).data('columnIndex')).search(this.value).draw();
-        });
-
-        $(".dataTables_filter input").on('keyup change', function() {
-          //clear column search values
-          table.columns().search('');
-          //clear input values
-          $('#txtbusqueda').val('');
-        });
-    });
-    </script>
-
             
+/*        //var t = $('#gridsoli').DataTable();
+        var counter = 1;
+        
+        $('#addRow').on( 'click', function () {
+            table.row.add( {
+                "Fecha":       "10/01/2018",
+                "Nombre_Para":   "System Architect",
+                "asunto":     "wasdasasdas",
+                "Num": "0",
+                "Num2":     "0"
+            } ).draw();
+
+            counter++;
+        } );*/
+
+        // Automatically add a first row of data
+        //$('#addRow').click();
+            
+/*
+        $('td.fin').on('click', function (e) {
+            e.preventDefault();
+
+            var nRow = $(this).parents('tr')[0];
+            oTable.fnDeleteRow( nRow );
+        } );*/
+/*        $('#gridsoli tbody').on( 'click', 'tr', function () {
+        var row = gridsoli
+           .row($(this).closest("tr"))   //get DT API for the clicked row
+           .remove()
+           .draw();
+        });*/
+    } );
+
+    </script>

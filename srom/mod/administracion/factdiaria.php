@@ -55,7 +55,18 @@
     <?php echo Script(); ?>
 
     <script type="text/javascript">
-        $(function() {
+        var timer = 0;
+        $(function() {       
+            $( "#btnExcel" ).click(function() {$('.buttons-excel').click();});         
+            $( "#btnPDF" ).click(function() {$('.buttons-pdf').click();});         
+            $( "#btnPrint" ).click(function() {$('.buttons-print').click();});
+            
+            document.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+                var touch = e.touches[0];
+                //alert(touch.pageX + " - " + touch.pageY);
+            }, false);
+            
             $("form").on('submit', function(e) {
                 e.preventDefault();
                 $('#CargaGif').show();
@@ -80,7 +91,7 @@
             });
         });
 
-        $(document).on('dblclick touchstart','.Seleccionado',function(){
+        $(document).on('click touchstart','.Seleccionado',function(){
             var id = $(this).attr("id");
             var name = $(this).attr("data-name");
             $("#TxtCliente").val(id);
@@ -90,26 +101,33 @@
         });
         
         $(document).on('click touchstart','tr.tar',function(){
-            var id = $(this).attr("id");
-            $("#TxtTarea").val(id);
-            $('#CargaGif').show();
-            $.ajax({
-                type: "POST",
-                url: 'nvo-tareascomselect.php',
-                data: $("#frmcoment").serialize(), 
-                success: function(data) {
-                    $('#CargaGif').hide();
-                    $(".comentarios").html(data);
-                    $('#btnEnviar2').click();
-                    $('#gridcom').DataTable().draw();
-                },
-                error: function(error) {
-                    $('#CargaGif').hide();
-                    console.log(error);
-                    alert('Algo salio mal :S');
-                }
-            });
-            return false;
+            if(timer == 0){
+                timer = 1;
+                timer = setTimeout(function(){ timer = 0; }, 600);
+            }
+            else { 
+                var id = $(this).attr("id");
+                $("#TxtClave").val(id);
+                $('#CargaGif').show();
+                $.ajax({
+                    type: "POST",
+                    url: 'tabla-detallefacturas.php',
+                    data: $("form").serialize(), 
+                    success: function(data) {
+                        $('#CargaGif').hide();
+                        $(".griddet").html(data);
+                        $('#btnEnviar2').click();
+                        $('#gridcom').DataTable().draw();
+                    },
+                    error: function(error) {
+                        $('#CargaGif').hide();
+                        console.log(error);
+                        alert('Algo salio mal :S');
+                    }
+                });
+                return false;
+                timer = 0; 
+            }
         });
         
         <?php echo JqueryCmbClientes(); ?> 

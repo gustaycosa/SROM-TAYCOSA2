@@ -82,6 +82,8 @@ $(document).ready(function() {
                 { 'title': 'TOTAL', className: "text-right", 'targets': 8}
             ],
             'createdRow': function ( row, data, index ) {
+                $(row).attr({id:data.Movimiento});
+                $(row).addClass('tar');
             },
             dom: 'lfBrtip',    
             paging: false,
@@ -186,7 +188,7 @@ $(document).ready(function() {
                     'sSortDescending': ': Activar para ordenar la columna de manera descendente'
                 }
             },
-            'scrollY': '60vh',
+            'scrollY': '45vh',
             'scrollCollapse': true,
             'scrollX': true,
             'paging': false,
