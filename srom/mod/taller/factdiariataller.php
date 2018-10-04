@@ -102,7 +102,7 @@
                 $('#CargaGif').show();
                 $.ajax({
                     type: "POST",
-                    url: 'tabla-detallefacturas.php',
+                    url: '../generales/tabla-detallefacturas.php',
                     data: $("form").serialize(), 
                     success: function(data) {
                         $('#CargaGif').hide();

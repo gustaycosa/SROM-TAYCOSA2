@@ -73,7 +73,7 @@
             $("#CargaGif").show();
             $.ajax({
                 type: "POST",
-                url: "CmbClientes.php",
+                url: "../generales/CmbClientes.php",
                 data: $("form").serialize(), 
                 success: function(data) {
                     $("#CargaGif").hide();
