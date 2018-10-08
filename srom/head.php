@@ -159,36 +159,7 @@
         $Cmb = $Cmb."</select>";
         return $Cmb;
     }
-    function Cabecera($Titulo){
-        /*
-        $ptr = $ptr.'<head>
-        <title id="title">'.$Titulo.'</title>
-        <meta charset=utf-8>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
-        <meta name="author" content="TAYCO SA DE CV" />
-        <link rel="stylesheet" type="text/css" href="css/normalize.css" />
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"  />
-        <!--
-        <link rel="stylesheet" type="text/css" href="css/jasny-bootstrap.min.css">
-        -->
-        <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
-        <link rel="stylesheet" type="text/css" href="css/buttons.dataTables.min.css">
-        <link rel="stylesheet" type="text/css" href="css/PushMenu.css">
-        <link rel="stylesheet" type="text/css" href="css/demo.css" />
-        <link rel="shortcut icon" href="favicon.ico">
-        <link rel="stylesheet" type="text/css" href="css/component.css" />
-        <link rel="stylesheet" type="text/css" href="css/ThemeBlue.css"  />
-        <link rel="stylesheet" type="text/css" href="css/barratareas.css"  />
-		<link rel="stylesheet" type="text/css" href="css/CargaGif.css"  />
-        </head>';
-        return $ptr;
-        
-                echo '<link rel="stylesheet" href="//code.jquery.com/mobile/1.5.0-alpha.1/jquery.mobile-1.5.0-alpha.1.min.css">';
-        */		
+    function Cabecera($Titulo){	
         echo '<head>';
         echo '<title id="title">'.$Titulo.'</title>';
         echo '<meta charset=utf-8>';
@@ -211,75 +182,13 @@
     }
 
     function Script(){
-        /*
-        $ptr = '
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script type="text/javascript" src="jquery.min.js"></script>
-        <script type="text/javascript"  src="js/bootstrap.js"></script>
-        <!--
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
-        -->
-        <script type="text/javascript"  src="js/validaciones.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.min.css">
-        <script src="js/jeditable.min.js" type="text/javascript"></script>
-        <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
-        <script src="js/dataTables.bootstrap.min.js" type="text/javascript"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
-        <script type="text/javascript" src="//cdn.datatables.net/buttons/1.2.1/js/buttons.flash.min.js"></script>
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-        <script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-        <script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-        <script type="text/javascript" src="//cdn.datatables.net/buttons/1.2.1/js/buttons.html5.min.js"></script>
-        <script type="text/javascript" src="//cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>
-        <script type="text/javascript" src="//cdn.datatables.net/buttons/1.2.1/js/buttons.colVis.min.js"></script>
-        <script type="text/javascript" src="js/modernizr.custom.js"></script>
-		<script type="text/javascript" src="js/classie.js"></script>
-        ';
-        /*
-        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-        <script type="text/javascript" src="js/gnmenu.js"></script>
-		<script>
-			new gnMenu( document.getElementById( "gn-menu" ) );
-		</script>
-        return $ptr;
-        
-        echo '<script type="text/javascript" src="jquery.min.js"></script>';
-        echo '<script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>';        
-        */
         echo '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>';
-        echo '<script type="text/javascript" src="jquery.min.js"></script>';
-        //echo '<script src="//code.jquery.com/mobile/1.5.0-alpha.1/jquery.mobile-1.5.0-alpha.1.min.js"></script>';
-        //echo '<script type="text/javascript" src="js/jquerymobilelight.js"></script>';
+        echo '<script type="text/javascript" src="js/jquery.min.js"></script>';
         echo '<script type="text/javascript" src="js/bootstrap.js"></script>';
         echo '<script type="text/javascript" src="js/validaciones.js"></script>';
         echo '<link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.min.css">';
-        echo '<script type="text/javascript" src="js/jeditable.min.js" ></script>';
-        echo '<script type="text/javascript" src="js/jquery.dataTables.min.js" ></script>';
-        echo '<script type="text/javascript" src="js/dataTables.bootstrap.min.js" ></script>';
-/*        
-        echo '<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>';
-        echo '<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>';
-        echo '<script type="text/javascript" src="//cdn.datatables.net/buttons/1.2.1/js/buttons.flash.min.js"></script>';
-        echo '<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>';
-        echo '<script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>';
-        echo '<script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>';
-        echo '<script type="text/javascript" src="//cdn.datatables.net/buttons/1.2.1/js/buttons.html5.min.js"></script>';
-        echo '<script type="text/javascript" src="//cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>';
-        echo '<script type="text/javascript" src="//cdn.datatables.net/buttons/1.2.1/js/buttons.colVis.min.js"></script>';
-        */
-        echo '<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>';
-        echo '<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>';
-        echo '<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>';
-        echo '<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>';
-        echo '<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>';
-        echo '<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>';
-        echo '<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>';
-        echo '<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>';
-        
         echo '<script type="text/javascript" src="js/modernizr.custom.js"></script>';
         echo '<script type="text/javascript" src="js/classie.js"></script>';
-        //echo '<script type="text/javascript" src="js/canvasjs.min.js"></script>';
     }
 
 

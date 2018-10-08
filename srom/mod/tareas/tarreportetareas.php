@@ -20,16 +20,17 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="TxtClave" name="TxtClave" value="<?php $id = $_GET["e"]; echo $id;?>" placeholder="Ingrese ejercicio">
                     </div>
-                    <button type="submit" id="btnEnviar" class="btn btn-primary btn-sm" onMouseOver="">                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Consultar</button>                     <button type="button" id="btnExcel" class="btn btn-success btn-sm" onMouseOver="">                         <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Excel</button>                     <button type="button" id="btnPDF" class="btn btn-danger btn-sm" onMouseOver="">                         <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> PDF</button>                     <button type="button" id="btnPrint" class="btn btn-default btn-sm" onMouseOver="">                         <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir</button>
+                    <button type="submit" id="btnEnviar" class="btn btn-primary btn-sm" onMouseOver=""><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Consultar</button>
                 </form>
                 <div class="respuesta"></div>                 
                 <div class="form-inline">
-                    <label for="inputFechaIni">Filtro:</label>
-                    <input type="text" class="form-control" id="txtbusqueda" name="txtbusqueda" data-column-index='0' value="" placeholder="Busqueda rapida">
+                    <div class="modal-footer col-sm-2">
+                        <?php echo BusquedaGrid(0,'nombre');?>
+                    </div>
+                    <div class="modal-footer col-sm-10">
+                        <?php echo HtmlButtons();?>
+                    </div>
                 </div>
-				<?php echo CargaGif();?>
-            </div>
-        </div>
            <div class='modal' id='mdlcom' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
               <div class='modal-dialog' role='document'>
                 <div class='modal-content'>
@@ -65,27 +66,16 @@
                 </div>
               </div>
             </div>
+                <?php echo CargaGif();?>
+            </div>
+        </div>
     </body>
 
     <?php echo Script(); ?>
 
-    <script type="text/javascript"> 
-        
-        $(document).ready(function() {
-            var table = $('#grid').DataTable({
-                scrollY: 200,
-                scrollX: true
-            } );
-        } );
-
-    </script>
-
-<script type="text/javascript">
-    var timer = 0;
-    $(function() {       
-        $( "#btnExcel" ).click(function() {$('.buttons-excel').click();});         
-        $( "#btnPDF" ).click(function() {$('.buttons-pdf').click();});         
-        $( "#btnPrint" ).click(function() {$('.buttons-print').click();});
+    <script type="text/javascript">
+        $(function() {        
+            <?php echo JqueryButtons();?>
 
         document.addEventListener('touchmove', function(e) {
             e.preventDefault();
@@ -119,12 +109,12 @@
             });
         });
         
-        $(document).on('dblclick touchstart','tr.tar',function(){
-            if(timer == 0){
+        $(document).on('click touchstart','tr.tar',function(){
+/*            if(timer == 0){
                 timer = 1;
                 timer = setTimeout(function(){ timer = 0; }, 600);
             }
-            else { 
+            else { */
                 var id = $(this).attr("id");
                 $("#TxtTarea").val(id);
                 $('#CargaGif').show();
@@ -149,8 +139,8 @@
                     }
                 });
                 return false;// Evitar ejecutar el submit del formulario.	
-                timer = 0; 
-            }
+/*                timer = 0; 
+            }*/
         });
     </script>
 

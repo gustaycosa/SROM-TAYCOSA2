@@ -69,35 +69,30 @@
                         </div>
                     </div>
                     <div class="col-sm-12 ">
-
                         <button type="submit" id="btnEnviar2" class="btn btn-primary btn-sm" onMouseOver="">Consultar</button>
                         <button type="button" id="btnNuevo" class="btn btn-primary btn-sm" onMouseOver="" data-toggle="modal" data-target="#mdlnvo">Nuevo</button>
-                    <button type="submit" id="btnEnviar" class="btn btn-primary btn-sm" onMouseOver="">                         
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Consultar</button>
-                    <button type="button" id="btnExcel" class="btn btn-success btn-sm" onMouseOver="">                         
-                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Excel</button>
-                    <button type="button" id="btnPDF" class="btn btn-danger btn-sm" onMouseOver="">
-                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> PDF</button>
-                    <button type="button" id="btnPrint" class="btn btn-default btn-sm" onMouseOver="">                         
-                        <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir</button>
                     </div>
                   
                 </form>
                 <div class="respuesta"></div>                 
-
-            
+                <div class="form-inline">
+                    <div class="modal-footer col-sm-2">
+                        <?php echo BusquedaGrid(0,'nombre');?>
+                    </div>
+                    <div class="modal-footer col-sm-10">
+                        <?php echo HtmlButtons();?>
+                    </div>
                 </div>
-              </div>
                 <?php echo CargaGif();?>
-        <?php echo Script(); ?>
+            </div>
+        </div>
     </body>
 
+    <?php echo Script(); ?>
+
     <script type="text/javascript">
-        
         $(function() {        
-            $( "#btnExcel" ).click(function() {$('.buttons-excel').click();});         
-            $( "#btnPDF" ).click(function() {$('.buttons-pdf').click();});         
-            $( "#btnPrint" ).click(function() {$('.buttons-print').click();});           
+            <?php echo JqueryButtons();?>     
             $("form#formulario").on('submit', function(e) {  
                 var id = $("#TxtTarea").val();
                 $("#TxtTareaCom").val(id);

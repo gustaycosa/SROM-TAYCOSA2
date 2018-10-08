@@ -190,12 +190,12 @@
             return false; // Evitar ejecutar el submit del formulario.
         });
         
-        $(document).on('dblclick touchstart','tr.tar',function(){
-            if(timer == 0){
+        $(document).on('click touchstart','tr.tar',function(){
+/*            if(timer == 0){
                 timer = 1;
                 timer = setTimeout(function(){ timer = 0; }, 600);
             }
-            else { 
+            else { */
                 var id = $(this).attr("id");
                 $("#TxtTarea").val(id);
                 $('#CargaGif').show();
@@ -220,8 +220,8 @@
                     }
                 });
                 return false;
-                timer = 0; 
-            }
+/*                timer = 0; 
+            }*/
         });
         
         $(document).on('click touchstart','td.fin',function(){

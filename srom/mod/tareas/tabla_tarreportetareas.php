@@ -52,8 +52,8 @@ for($i=0; $i<count($Datos); $i++){
                 ],
                 columnDefs: [
                     { "title": "FECHA", "targets": 0},
-                    { "title": "DIRIGIDO A", "targets": 1},
-                    { "title": "RESPONSABLE", "targets": 2},
+                    { "title": "DE", "targets": 1},
+                    { "title": "A", "targets": 2},
                     { "title": "ASUNTO", "targets": 3},
                     { "title": "ESTATUS", "targets": 4}
                 ],

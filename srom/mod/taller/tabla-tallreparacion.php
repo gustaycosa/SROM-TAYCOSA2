@@ -127,7 +127,7 @@ try{
             dom: 'lfBrtip',    
             paging: false,
             searching: true,
-            ordering: false,
+            ordering: true,
             buttons: [
                 {
                     extend: 'copy',
@@ -232,7 +232,7 @@ try{
             'scrollCollapse': true,
             'paging':         false,
             initComplete: function () {
-                this.api().columns().every( function () {
+                this.api().columns([8, 9, 10]).every( function () {
                     var column = this;
 
                     var select = $('<select><option value="">Seleciona</option></select>')

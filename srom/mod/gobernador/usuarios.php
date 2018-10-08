@@ -18,18 +18,19 @@
             <div class="panel-body">
                 <form id="formulario" method="POST" class="form-inline">
                     <input type="hidden" id="TxtClave" name="TxtClave">
-                                        <button type="submit" id="btnEnviar" class="btn btn-primary btn-sm" onMouseOver="">                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Consultar</button>                     <button type="button" id="btnExcel" class="btn btn-success btn-sm" onMouseOver="">                         <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Excel</button>                     <button type="button" id="btnPDF" class="btn btn-danger btn-sm" onMouseOver="">                         <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> PDF</button>                     <button type="button" id="btnPrint" class="btn btn-default btn-sm" onMouseOver="">                         <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir</button>
+                    <button type="submit" id="btnEnviar" class="btn btn-primary btn-sm" onMouseOver=""><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Consultar</button> 
                     <button type="button" id="btnNuevo" class="btn btn-primary btn-sm" onMouseOver="" data-toggle="modal" data-target="#mdlnvo">Nuevo</button>
                     <button type="button" id="btnEliminar" class="btn btn-primary btn-sm" onMouseOver="">Eliminar</button>
                 </form>
                 <div class="respuesta"></div>                 
                 <div class="form-inline">
-                    <label for="inputFechaIni">Filtro:</label>
-                    <input type="text" class="form-control" id="txtbusqueda" name="txtbusqueda" data-column-index='0' value="" placeholder="Busqueda rapida">
+                    <div class="modal-footer col-sm-2">
+                        <?php echo BusquedaGrid(0,'nombre');?>
+                    </div>
+                    <div class="modal-footer col-sm-10">
+                        <?php echo HtmlButtons();?>
+                    </div>
                 </div>
-				<?php echo CargaGif();?>
-            </div>
-        </div>
         <div class='modal' id='mdlnvo' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
               <div class='modal-dialog' role='document'>
                 <div class='modal-content'>
@@ -99,11 +100,16 @@
             </div>
 
         <?php echo MdlSearch('MdlMaqDet','Detalle maquinaria');?>
-        <?php echo Script(); ?>
+                <?php echo CargaGif();?>
+            </div>
+        </div>
     </body>
 
+    <?php echo Script(); ?>
+
     <script type="text/javascript">
-        $(function() {        $( "#btnExcel" ).click(function() {$('.buttons-excel').click();});         $( "#btnPDF" ).click(function() {$('.buttons-pdf').click();});         $( "#btnPrint" ).click(function() {$('.buttons-print').click();});
+        $(function() {        
+            <?php echo JqueryButtons();?>
 
             $("form#formulario").on('submit', function(e) {
                 e.preventDefault();

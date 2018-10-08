@@ -1,5 +1,6 @@
 <?php
     $WebService = 'http://dwh.taycosa.mx/WEB_SERVICES/DataLogs.asmx?wsdl';
+    //$WebService = '192.168.1.1/WEB_SERVICES/DataLogs.asmx?wsdl';
     $Empresa = 'TAYCOSA';
 
     function CmbMes(){
@@ -99,6 +100,21 @@
         ';
     }
 
+    function BusquedaGrid($iColumna, $sTexto){
+        echo '<input type="text" class="form-control" id="txtbusqueda" name="txtbusqueda" data-column-index="'.$iColumna.'" value="" placeholder="Busqueda por '.$sTexto.'">';
+    }
+
+    function HtmlButtons(){
+        echo '<button type="button" id="btnExcel" class="btn btn-success btn-sm" onMouseOver=""><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>Descargar Excel</button>';               
+        echo '<button type="button" id="btnPDF" class="btn btn-danger btn-sm" onMouseOver=""><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>Descargar PDF</button>';    
+        echo '<button type="button" id="btnPrint" class="btn btn-default btn-sm" onMouseOver=""><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir</button>';
+    }
+
+    function JqueryButtons(){
+        echo '$( "#btnExcel" ).click(function() {$(".buttons-excel").click();});';
+        echo '$( "#btnPDF" ).click(function() {$(".buttons-pdf").click();});';
+        echo '$( "#btnPrint" ).click(function() {$(".buttons-print").click();});';
+    }
 
     function CmbGenerico($sWhere1,$sWhere2){
         try{ 

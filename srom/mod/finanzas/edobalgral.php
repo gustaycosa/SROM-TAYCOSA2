@@ -24,7 +24,7 @@
                         <?php echo CmbMes();?>
                     </div>
 
-                                        <button type="submit" id="btnEnviar" class="btn btn-primary btn-sm" onMouseOver="">                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Consultar</button>                     <button type="button" id="btnExcel" class="btn btn-success btn-sm" onMouseOver="">                         <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Excel</button>                     <button type="button" id="btnPDF" class="btn btn-danger btn-sm" onMouseOver="">                         <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> PDF</button>                     <button type="button" id="btnPrint" class="btn btn-default btn-sm" onMouseOver="">                         <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir</button>
+                    <button type="submit" id="btnEnviar" class="btn btn-primary btn-sm" onMouseOver=""><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Consultar</button>
                     
                     <button id="BtnAnaCli" class="btn btn-primary" type="button" data-toggle="modal" data-target="#MdlAntCli">
                         Clientes
@@ -45,8 +45,12 @@
                 </form>
                 <div class="respuesta"></div>                 
                 <div class="form-inline">
-                    <label for="inputFechaIni">Filtro:</label>
-                    <input type="text" class="form-control" id="txtbusqueda" name="txtbusqueda" data-column-index='0' value="" placeholder="Busqueda rapida">
+                    <div class="modal-footer col-sm-2">
+                        <?php echo BusquedaGrid(0,'nombre');?>
+                    </div>
+                    <div class="modal-footer col-sm-10">
+                        <?php echo HtmlButtons();?>
+                    </div>
                 </div>
                 <?php echo CargaGif();?>
             </div>
@@ -56,13 +60,15 @@
             <?php echo MdlSearch('MdlAnaDeu','Deudores diversos');?>
             <?php echo MdlSearch('MdlAnaAcr','Acreedores diversos');?>
             <?php echo MdlSearch('MdlAnaPro','Proveedores');?>
-        </div>
+
+            </div>
     </body>
 
     <?php echo Script(); ?>
 
     <script type="text/javascript">
-        $(function() {        $( "#btnExcel" ).click(function() {$('.buttons-excel').click();});         $( "#btnPDF" ).click(function() {$('.buttons-pdf').click();});         $( "#btnPrint" ).click(function() {$('.buttons-print').click();});
+        $(function() {        
+            <?php echo JqueryButtons();?>
             $('#BtnAnaCli').click(function() {
                 //$('#btnEnviar').attr('disabled', 'disabled')
                 $('#CargaGif').show();
